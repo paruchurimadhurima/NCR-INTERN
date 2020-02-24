@@ -1,4 +1,8 @@
 #include <stdlib.h>
+#include <iostream>
+#include <time.h>
+
+using namespace std;
 
 #include "stack.h"
 #include "circularQueue.h"
@@ -101,8 +105,8 @@ void self_adjust_linkedlist() {
 }
 
 void sort_dataset_testcases() {
-	int int_arr[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-	char char_arr[10] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j' };
+	int int_arr[10] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+	char char_arr[10] = { 'j', 'i', 'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a' };
 	int len = 20;
 	struct data_element** arr = (struct data_element**)calloc(len, sizeof(struct data_element*));
 	int i, j = 0;
@@ -111,6 +115,11 @@ void sort_dataset_testcases() {
 		arr[j++] = insert_char(char_arr[i]);
 	}
 	print_data_set(arr, len);
+	clock_t timestamp;
+	timestamp = clock();
 	quick_sort(arr, 0, len - 1);
+	timestamp = clock() - timestamp;
+	double time_taken = ((double)timestamp) / CLOCKS_PER_SEC;
 	print_data_set(arr, len);
+	cout << "Time took for sorting is " << time_taken << " seconds";
 }

@@ -49,10 +49,10 @@ struct data_element* insert_char(char ch)
 }
 
 
-void swap(struct data_element* ele1, struct data_element* ele2) {
-	struct data_element* temp = ele1;
-	ele1 = ele2;
-	ele2 = temp;
+void swap(struct data_element** arr, int i, int j) {
+	struct data_element* temp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = temp;
 }
 
 int compare(struct data_element* ele1, struct data_element* ele2) {
@@ -66,7 +66,6 @@ int compare(struct data_element* ele1, struct data_element* ele2) {
 	}
 	else {
 		if (ele1->size == sizeof(char)) {
-			//cout << *(char*)(ele1->data_ptr) << * (char*)(ele2->data_ptr) << endl;
 			if (*(char*)(ele1->data_ptr) > * (char*)(ele2->data_ptr)) {
 				return 1;
 			}
@@ -78,7 +77,6 @@ int compare(struct data_element* ele1, struct data_element* ele2) {
 			}
 		}
 		else {
-			//cout << *(int*)(ele1->data_ptr) << * (int*)(ele2->data_ptr) << endl;
 			if (*(int*)(ele1->data_ptr) > * (int*)(ele2->data_ptr)) {
 				return 1;
 			}
@@ -100,11 +98,12 @@ void quick_sort(struct data_element** arr, int low, int high) {
 		i = low;
 		j = high;
 		while (i < j) {
-			cout << i <<"  "<< j << endl;
-			while ((compare(arr[i], arr[pivot]) == -1 || compare(arr[i], arr[pivot]) == 0 )&& i < high)
+			while ((compare(arr[i], arr[pivot]) == -1 || compare(arr[i], arr[pivot]) == 0) && i < high) {
 				i++;
-			while (compare(arr[j],arr[pivot]) == 1)
+			}
+			while (compare(arr[j], arr[pivot]) == 1) {
 				j--;
+			}
 			if (i < j) {
 				swap(arr[i], arr[j]);
 			}
