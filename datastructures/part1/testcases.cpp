@@ -10,85 +10,45 @@ using namespace std;
 #include "dataelement.h"
 
 void stack_testcases() {
-	stack obj;
-	obj.push(7);
-	obj.push(27);
-	obj.push(37);
-	obj.push(57);
-	obj.push(157);
-	obj.push(517);
-	obj.push(573);
-	obj.push(257);
-	obj.push(577);
-	obj.push(579);
-	obj.push(1579);
-	obj.push(3579);
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.push(7);
-	obj.push(27);
-	obj.push(37);
-	obj.push(57);
-	obj.push(157);
-	obj.push(3579);
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
-	obj.pop();
+	int len;
+	cin >> len;
+	stack obj(len);
+	int input, value;
+	do {
+		cin >> input;
+		switch (input) {
+		case 1:
+			cin >> value;
+			obj.push(value);
+			break;
+		case 2:
+			obj.pop();
+			break;
+		default:
+			cout << "Invalid input" << endl;
+		}
+	}while (input != -1);
 }
 
 void circular_queue_testcase() {
-	circularQueue obj;
-	obj.enqueue(1);
-	obj.enqueue(2);
-	obj.enqueue(3);
-	obj.enqueue(4);
-	obj.enqueue(5);
-	obj.enqueue(6);
-	obj.enqueue(7);
-	obj.enqueue(8);
-	obj.enqueue(9);
-	obj.enqueue(10);
-	obj.enqueue(11);
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.enqueue(1);
-	obj.enqueue(2);
-	obj.enqueue(3);
-	obj.enqueue(9);
-	obj.enqueue(10);
-	obj.enqueue(11);
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
-	obj.dequeue();
+	int len;
+	cin >> len;
+	circularQueue obj(len);
+	int input, value;
+	do {
+		cin >> input;
+		switch (input) {
+		case 1:
+			cin >> value;
+			obj.enqueue(value);
+			break;
+		case 2:
+			obj.dequeue();
+			break;
+		default:
+			cout << "Invalid input" << endl;
+		}
+	} while (input != -1);
 }
 
 void merge_linkedlists_testcases() {
@@ -96,8 +56,13 @@ void merge_linkedlists_testcases() {
 }
 
 void self_adjust_linkedlist() {
-	int arr[9] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	int len = 9, value = 10;
+	int len, value, i;
+	cin >> len;
+	int* arr = (int*)calloc(len, sizeof(int));
+	for (i = 0; i < len; i++) {
+		cin >> arr[i];
+	}
+	cin >> value;
 	struct node* head = array_to_linkedlist(arr, len);
 	display_linkedlist(head);
 	head = self_adjust(head, value);
@@ -105,15 +70,29 @@ void self_adjust_linkedlist() {
 }
 
 void sort_dataset_testcases() {
-	int int_arr[10] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-	char char_arr[10] = { 'j', 'i', 'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a' };
-	int len = 20;
+	int len, temp;
+	cin >> len;
+	temp = len;
 	struct data_element** arr = (struct data_element**)calloc(len, sizeof(struct data_element*));
-	int i, j = 0;
-	for (i = 0; i < 10; i++) {
-		arr[j++] = insert_int(int_arr[i]);
-		arr[j++] = insert_char(char_arr[i]);
-	}
+	int input, int_value, j = 0;
+	char char_value;
+	do {
+		cin >> input;
+		switch (input) {
+		case 1:
+			cin >> int_value;
+			arr[j++] = insert_int(int_value);
+			temp--;
+			break;
+		case 2:
+			cin >> char_value;
+			arr[j++] = insert_char(char_value);
+			temp--;
+			break;
+		default:
+			cout << "Invalid input" << endl;
+		}
+	} while (temp);
 	print_data_set(arr, len);
 	clock_t timestamp;
 	timestamp = clock();
